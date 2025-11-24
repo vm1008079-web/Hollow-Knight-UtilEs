@@ -47,6 +47,90 @@
         }
 
         /* ------------------------------------------------ */
+        /* BARRA DE NAVEGACIÓN SUPERIOR */
+        /* ------------------------------------------------ */
+        header#top-nav {
+            width: 100%;
+            background: linear-gradient(90deg, #4169e1 0%, #274bdb 100%);
+            color: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand .logo {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-family: monospace;
+        }
+
+        nav.top-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        nav.top-menu li {
+            display: inline-flex;
+        }
+
+        nav.top-menu a {
+            color: rgba(255,255,255,0.95);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.15s, color 0.15s;
+            display: inline-block;
+        }
+
+        nav.top-menu a:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav.top-menu a.active {
+            background: rgba(255,255,255,0.16);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.08) inset;
+        }
+
+        /* Mobile: simple hamburger toggling (behaviour not implemented, just layout-friendly) */
+        @media (max-width: 700px) {
+            .nav-inner {
+                padding: 10px 14px;
+            }
+            nav.top-menu ul {
+                gap: 8px;
+            }
+            .brand { font-size: 1rem; }
+        }
+
+        /* ------------------------------------------------ */
         /* WRAPPER PRINCIPAL Y LAYOUT (Adaptado a 2 Col.) */
         /* ------------------------------------------------ */
         #wrapper {
@@ -276,7 +360,27 @@
     
 </head>
 <body>
-        <div id="root"></div> 
+    <!-- BARRA DE NAVEGACIÓN (visible encima de la app) -->
+    <header id="top-nav" role="banner" aria-label="Barra de navegación principal">
+        <div class="nav-inner">
+            <div class="brand" aria-hidden="false">
+                <span class="logo" aria-hidden="true">Ω</span>
+                <span>Comunidad Omega</span>
+            </div>
+
+            <nav class="top-menu" role="navigation" aria-label="Menú principal">
+                <ul>
+                    <li><a href="#" class="">Home</a></li>
+                    <li><a href="#" class="">Forum</a></li>
+                    <li><a href="#" class="active" aria-current="page">Editor</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- WRAPPER: aquí se montará la app (el bundle) -->
+    <div id="wrapper">
+        <div id="root"></div>
     </div>
 
     <div id="footer-copyright">
