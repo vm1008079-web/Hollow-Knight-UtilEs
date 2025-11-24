@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ejemplo básico - Menú de navegación</title>
+  <style>
+    /* Estilos mínimos para visualizar la estructura */
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0;
+      line-height: 1.4;
+      color: #222;
+    }
+
+    .header, .footer {
+      background: #0b74de;
+      color: white;
+      padding: 1rem;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .main {
+      background: #f7f7f7;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    .sidebar {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex; /* menú horizontal; quita esto para vertical */
+      gap: 0.5rem;
+    }
+
+    nav li {
+      margin: 0;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 0.5rem 0.75rem;
+      color: white;
+      background: #1e90ff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background: #005bb5;
+      outline: none;
+    }
+
+    /* Responsive: menú vertical en pantallas pequeñas */
+    @media (max-width: 640px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      nav ul {
+        flex-direction: column;
+      }
+      nav a {
+        color: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <h1>Mi sitio - Ejemplo básico</h1>
+    <!-- Menú de navegación con UL y LI -->
+    <nav role="navigation" aria-label="Menú principal">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <main class="main" role="main">
+      <section id="inicio">
+        <h2>Inicio</h2>
+        <p>Bienvenido al ejemplo. Aquí va el contenido principal del sitio.</p>
+      </section>
+
+      <section id="sobre">
+        <h2>Sobre</h2>
+        <p>Sección sobre el propósito del sitio o información del autor.</p>
+      </section>
+
+      <section id="servicios">
+        <h2>Servicios</h2>
+        <p>Listado breve de servicios o características.</p>
+      </section>
+
+      <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Formulario o información de contacto.</p>
+      </section>
+    </main>
+
+    <aside class="sidebar" role="complementary">
+      <h3>Barra lateral</h3>
+      <p>Enlaces, info adicional o widgets.</p>
+      <div>
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="#inicio">Ir a inicio</a></li>
+          <li><a href="#contacto">Contactar</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <p>© 2025 - Ejemplo creado por ti</p>
+  </footer>
+
+</body>
+</html>
