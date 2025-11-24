@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Omega Save Editor</title>
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118402999-2"></script>
+	<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-118402999-2');</script>
+    
+    <style>
+        /* ------------------------------------------------ */
+        /* ESTILOS BASE Y REINICIO (De tu CSS oculto) */
+        /* ------------------------------------------------ */
+        * {
+            box-sizing: border-box;
+        }
+
+        a {
+            color: royalblue;
+            text-decoration-line: none;
+        }
+
+        a:visited {
+            color: royalblue;
+        }
+
+        /* ------------------------------------------------ */
+        /* TIPOGRAFÍA Y BODY */
+        /* ------------------------------------------------ */
+        body, html {
+            margin: 0; 
+            padding: 0;
+            font-family: "Open Sans", sans-serif; /* Fallback añadido */
+            font-size: 16px; 
+            background-color: #f7f7f7; /* Fondo más claro */
+            color: #333;
+        }
+
+        body {
+            /* Centrado de la aplicación, esencial para el 100% de zoom */
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            min-height: 100vh;
+        }
+
+        /* ------------------------------------------------ */
+        /* WRAPPER PRINCIPAL Y LAYOUT (Adaptado a 2 Col.) */
+        /* ------------------------------------------------ */
+        #wrapper {
+            /* Adaptamos el wrapper al layout responsivo y lo centramos */
+            width: 90%;
+            max-width: 1200px; /* Ancho amplio para el diseño de 2 columnas */
+            padding: 20px;
+            margin: 25px auto; /* Centrado y margen superior */
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+        }
+        
+        /* Contenedor de las dos columnas */
+        .app-container {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .left-column { flex: 1.2; } /* Damos un poco más de espacio a los textos */
+        .right-column { flex: 2; }
+        
+        /* Título de la Aplicación */
+        #app-title {
+            text-align: center;
+            color: #222;
+            margin: 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        /* ------------------------------------------------ */
+        /* COLUMNA IZQUIERDA: Textos e Instrucciones */
+        /* ------------------------------------------------ */
+        #description {
+            margin: 15px 0 10px 0;
+            line-height: 1.6;
+        }
+
+        #instructions {
+            color: #444;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+            list-style-type: square; 
+            padding-left: 20px;
+        }
+        
+        /* ------------------------------------------------ */
+        /* BOTONES E INPUTS */
+        /* ------------------------------------------------ */
+        button {
+            font-family: inherit; 
+            font-size: inherit; 
+            padding: 8px 15px; /* Padding ajustado */
+            user-select: none;
+            background-color: royalblue;
+            color: white;
+            border: 1px solid royalblue;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+             background-color: #4169e1; /* Azul un poco más oscuro */
+        }
+
+        button:focus {
+            outline: solid 1px royalblue;
+            box-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
+        }
+        
+        #file-button {
+            margin-right: 20px;
+        }
+        
+        label {
+            user-select: none;
+            color: #555;
+        }
+
+        /* Estilos para ocultar el input de archivo */
+        #file-input {
+            opacity: 0; 
+            width: 0; 
+            height: 0; 
+            position: fixed;
+            left: 0; 
+            top: 0;
+        }
+
+        /* ------------------------------------------------ */
+        /* EDITOR DE TEXTO (COLUMNA DERECHA) */
+        /* ------------------------------------------------ */
+        #editor-wrapper {
+            width: 100%; 
+            margin-top: 15px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        #editor {
+            font-size: inherit;
+            font-family: 'Consolas', monospace; /* Usamos una fuente de código */
+            color: #333;
+            border: 1px solid #888;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 5px;
+            width: 100%; 
+            height: 400px; /* Altura ajustada para el layout */
+            resize: vertical; /* Permitir redimensionar solo verticalmente */
+        }
+
+        #editor:focus {
+            border: 1px solid royalblue;
+            outline: none;
+        }
+
+        #editor-buttons {
+            margin-top: 10px; /* Margen aumentado para mejor separación */
+            display: flex; 
+            justify-content: flex-end; /* Alineamos a la derecha */
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        /* ------------------------------------------------ */
+        /* HISTORIAL */
+        /* ------------------------------------------------ */
+        #history {
+            margin: 50px 0 20px 0;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        #history > div:first-child {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #222;
+        }
+
+        #history > div:nth-child(0n+2) {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        #history > ul {
+            list-style: none; 
+            padding: 0;
+            margin: 0;
+            display: grid; 
+        }
+
+        .history-name {
+            color: royalblue;
+            font-weight: 600;
+        }
+
+        .history-date {
+            font-size: 0.8em;
+            color: #888;
+            margin-left: 10px;
+        }
+
+        .history-item {
+            background-color: #fff; 
+            padding: 8px 10px;
+            user-select: none;
+            border-bottom: 1px dashed #eee;
+            cursor: pointer;
+        }
+
+        .history-item:hover {
+            background-color: #f0f0ff; /* Resalte suave en azul */
+        }
+
+        .history-item:active {
+            background-color: #e0e0f5;
+        }
+
+        /* Capa de cobertura para arrastrar archivos */
+        #cover {
+            background-color: rgba(0, 0, 0, 0.219); 
+            position: fixed;
+            left: 0; 
+            top: 0;
+            width: 100vw; 
+            height: 100vh;
+        }
+
+        /* ------------------------------------------------ */
+        /* MEDIA QUERY: Móvil (Apilamiento) */
+        /* ------------------------------------------------ */
+        @media (max-width: 900px) {
+            .app-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            #wrapper {
+                width: 95%;
+                padding: 15px;
+            }
+            #editor-buttons {
+                 justify-content: space-between; /* Botones distribuidos */
+            }
+        }
+
+        /* ------------------------------------------------ */
+        /* COPYRIGHT */
+        /* ------------------------------------------------ */
+        #footer-copyright {
+            color: #aaa; 
+            font-size: 0.8em;
+            padding: 15px 0;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px; 
+        }
+    </style>
+    
+</head>
+<body>
+        <div id="root"></div> 
+    </div>
+
+    <div id="footer-copyright">
+        &copy; 2025 Omega Save Editor. Todos los derechos reservados
+    </div>
+
+<script type="text/javascript" src="bundle.js"></script>
+</body>
+</html>
