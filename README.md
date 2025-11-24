@@ -4,7 +4,7 @@ Una página web esencial para todo fanático de Hallownest. **Guías, foros, tut
 
 ---
 
-![Hollow Knight: El Caballero](https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Hollow_Knight_cover_art.jpg/220px-Hollow_Knight_cover_art.jpg)
+![Hollow Knight: El Caballero](https://static.wikia.nocookie.net/versus-compendium/images/8/88/Hollow_Knight_Logo.png/revision/latest?cb=20190222170212)
 
 ---
 
