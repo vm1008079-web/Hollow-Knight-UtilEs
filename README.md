@@ -24,14 +24,10 @@ Una página web esencial para todo fanático de Hallownest. **Guías, foros, tut
 
 | Rol | Miembro | Contacto |
 | :--- | :--- | :--- |
-| **Líder del Proyecto** 
-| [Omega Dev | `[@` |
-| **Desarrollador Backend** 
-| [Nombre del Miembro 2] | `[]` |
-| **Diseñador Web/Frontend** 
-| [Nombre del Miembro 3] | `[@UsuarioM3]` |
-| **Escritor de Contenido** | 
-[Nombre del Miembro 4] | `[@UsuarioM4]` |
+| **Líder del Proyecto** | Omega Dev | `@` |
+| **Desarrollador Backend** | [Nombre del Miembro 2] | `[]` |
+| **Diseñador Web/Frontend** | [Nombre del Miembro 3] | `[@UsuarioM3]` |
+| **Escritor de Contenido** | [Nombre del Miembro 4] | `[@UsuarioM4]` |
 
 ---
 
